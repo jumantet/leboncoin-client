@@ -1,26 +1,110 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import Header from "./components/Header";
+import Home from "./containers/Home";
+import Offer from "./containers/Offer";
+import Offers from "./containers/Offers";
+import SignUp from "./containers/SignUp";
+import Connect from "./containers/Connect";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import "./App.css";
 
 class App extends Component {
+  state = {
+    userName: null,
+    userId: null,
+    token: null
+  };
+
+  signUpTo = async inputs => {
+    console.log(inputs);
+    const response = await axios.post(
+      "https://leboncoin-api.herokuapp.com/api/user/sign_up",
+      inputs
+    );
+
+    await Cookies.set("token", response.data.token);
+    await Cookies.set("username", response.data.account.username);
+
+    await this.setState({
+      userId: response.data._id,
+      token: Cookies.get("token"),
+      userName: Cookies.get("username")
+    });
+  };
+
+  connectTo = async inputs => {
+    const response = await axios.post(
+      "https://leboncoin-api.herokuapp.com/api/user/log_in",
+      inputs
+    );
+
+    await Cookies.set("token", response.data.token);
+    await Cookies.set("username", response.data.account.username);
+
+    await this.setState({
+      userId: response.data._id,
+      token: Cookies.get("token"),
+      userName: Cookies.get("username")
+    });
+  };
+
+  deconnect = async () => {
+    await Cookies.remove("token");
+    await Cookies.remove("username");
+    await this.setState({
+      userId: null,
+      token: null,
+      userName: null
+    });
+  };
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <>
+          <Header
+            token={this.state.token}
+            deconnect={this.deconnect}
+            userName={this.state.userName}
+          />
+          <Switch>
+            <Route
+              exact={true}
+              path="/connect"
+              render={props => (
+                <Connect
+                  connectTo={inputs => this.connectTo(inputs)}
+                  {...props}
+                />
+              )}
+            />
+            <Route
+              exact={true}
+              path="/sign_up"
+              render={props => (
+                <SignUp signUpTo={inputs => this.signUpTo(inputs)} {...props} />
+              )}
+            />
+            <Route
+              exact={true}
+              path="/"
+              render={props => <Home {...props} />}
+            />
+            <Route
+              exact={true}
+              path="/offers"
+              render={props => <Offers {...props} />}
+            />
+            <Route
+              path="/offers/offer/:id"
+              render={props => <Offer {...props} />}
+            />
+          </Switch>
+        </>
+      </Router>
     );
   }
 }
