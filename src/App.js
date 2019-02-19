@@ -14,9 +14,9 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    userName: null,
+    userName: Cookies.get("userName") || null,
     userId: null,
-    token: null
+    token: Cookies.get("token") || null
   };
 
   signUpTo = async inputs => {
