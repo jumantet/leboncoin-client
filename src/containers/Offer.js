@@ -4,7 +4,8 @@ import axios from "axios";
 class Offer extends React.Component {
   state = {
     offer: {},
-    user: ""
+    user: "",
+    pictures: []
   };
   render() {
     return (
@@ -16,7 +17,17 @@ class Offer extends React.Component {
           crossorigin="anonymous"
         />
         <div className="offer">
-          <div className="imageOffer" />
+          <div
+            className="imageOffer"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            {this.state.pictures.length > 0 ? (
+              <img
+                style={{ objectFit: "contain", width: "500px" }}
+                src="https://res.cloudinary.com/lereacteur/image/upload/v1550663895/leboncoin/5bf53c45ad3fb30014389132/A90D8L2uEvVSb4GI.jpg"
+              />
+            ) : null}
+          </div>
           <div className="title">
             <h2>{this.state.offer.title}</h2>
             <span style={{ fontWeight: "bold", color: "#f36a35" }}>
@@ -51,10 +62,11 @@ class Offer extends React.Component {
     this.setState(
       {
         offer: offer,
-        user: offer.creator.account.username
+        user: offer.creator.account.username,
+        pictures: offer.pictures
       },
       () => {
-        console.log(this.state.user);
+        console.log(offer);
       }
     );
   };

@@ -7,6 +7,7 @@ import Offer from "./containers/Offer";
 import Offers from "./containers/Offers";
 import SignUp from "./containers/SignUp";
 import Connect from "./containers/Connect";
+import Publish from "./containers/Publish";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -101,6 +102,11 @@ class App extends Component {
             <Route
               path="/offers/offer/:id"
               render={props => <Offer {...props} />}
+            />
+
+            <Route
+              path="/publish"
+              render={props => <Publish token={this.state.token} {...props} />}
             />
           </Switch>
         </>

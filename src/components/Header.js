@@ -1,18 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import { ReactComponent as Logo } from "../images/logo.svg";
 
 class Header extends React.Component {
   render() {
     return (
       <div className="header">
         <div className="onglets">
-          <img className="logo" src={require("../images/leboncoin.png")} />
-          <h3 style={{ color: "#f36a35", fontSize: "16px" }}>
-            DEPOSER UNE OFFRE
-          </h3>
+          <Logo />
+          <Link style={{ textDecoration: "none" }} to="/publish">
+            <h3 style={{ color: "white", fontSize: "16px" }}>
+              DEPOSER UNE OFFRE
+            </h3>
+          </Link>
+
           <Link style={{ textDecoration: "none" }} to="/offers">
-            <h3 style={{ color: "#f36a35", fontSize: "16px" }}>OFFRES</h3>
+            <h3 style={{ color: "white", fontSize: "16px" }}>OFFRES</h3>
           </Link>
         </div>
         <div className="identification">
@@ -20,7 +24,7 @@ class Header extends React.Component {
             style={{ textDecoration: "none", color: "black" }}
             to={`/sign_up`}
           >
-            <h4>Créer un compte</h4>
+            <h4 style={{ color: "white" }}>Créer un compte</h4>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "black" }}
@@ -28,7 +32,9 @@ class Header extends React.Component {
           >
             {this.props.token ? (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <h4>Bienvenue {this.props.userName}</h4>
+                <h4 style={{ color: "white" }}>
+                  Bienvenue {this.props.userName}
+                </h4>
                 <button
                   onClick={this.props.deconnect}
                   style={{
@@ -46,7 +52,7 @@ class Header extends React.Component {
                 </button>
               </div>
             ) : (
-              <h4>Se connecter</h4>
+              <h4 style={{ color: "white" }}>Se connecter</h4>
             )}
           </Link>
         </div>

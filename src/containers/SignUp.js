@@ -143,12 +143,19 @@ class SignUp extends React.Component {
             <form
               onSubmit={event => {
                 event.preventDefault();
-                this.props.signUpTo({
-                  username: this.state.pseudo,
-                  email: this.state.mail,
-                  password: this.state.mdp
-                });
-                this.props.history.push("/offers");
+                {
+                  this.state.mdp === this.state.mdpconfirm &&
+                  this.state.salesconditions === true
+                    ? this.props.signUpTo(
+                        {
+                          username: this.state.pseudo,
+                          email: this.state.mail,
+                          password: this.state.mdp
+                        },
+                        this.props.history.push("/offers")
+                      )
+                    : alert("Réessayez");
+                }
               }}
             >
               <div style={{ marginTop: "20px" }}>
