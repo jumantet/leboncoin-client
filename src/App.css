@@ -124,3 +124,22 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.thumbs {
+  display: none;
+}
+
+.carousel .control-dots {
+  width: 90%;
+}
+
+.carousel .control-dots .dot {
+  background: #f36b35;
+}
+.carousel-status {
+  display: none;
+}
+
+.carousel > button {
+  color: #f36a35;
+}

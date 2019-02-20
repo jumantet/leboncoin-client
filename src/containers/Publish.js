@@ -19,8 +19,6 @@ class Publish extends React.Component {
   };
 
   handlePublish = async () => {
-    console.log(this.state);
-    console.log(this.props.token);
     const response = await axios.post(
       "https://leboncoin-api.herokuapp.com/api/offer/publish",
       {
@@ -35,6 +33,7 @@ class Publish extends React.Component {
         }
       }
     );
+    this.props.history.push("/offers");
 
     console.log(response.data);
   };
