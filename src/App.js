@@ -92,7 +92,7 @@ class App extends Component {
             <Route
               exact={true}
               path="/"
-              render={props => <Home {...props} />}
+              render={props => <Home token={this.state.token} {...props} />}
             />
             <Route
               exact={true}
