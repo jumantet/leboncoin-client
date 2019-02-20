@@ -126,7 +126,18 @@ class Offers extends React.Component {
                 to={`/offers/offer/${offer._id}`}
               >
                 <li className="offers" key={offer._id}>
-                  <div className="image" />
+                  <div className="image">
+                    {offer.pictures.length > 0 ? (
+                      <img
+                        style={{
+                          objectFit: "contain",
+                          width: "150px",
+                          height: "100px"
+                        }}
+                        src={offer.pictures[0]["secure_url"]}
+                      />
+                    ) : null}
+                  </div>
                   <div className="description">
                     <span
                       style={{

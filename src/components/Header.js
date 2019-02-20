@@ -9,7 +9,10 @@ class Header extends React.Component {
       <div className="header">
         <div className="onglets">
           <Logo />
-          <Link style={{ textDecoration: "none" }} to="/publish">
+          <Link
+            style={{ textDecoration: "none" }}
+            to={this.props.token ? `/publish` : `/connect`}
+          >
             <h3 style={{ color: "white", fontSize: "16px" }}>
               DEPOSER UNE OFFRE
             </h3>
