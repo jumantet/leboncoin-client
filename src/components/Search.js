@@ -4,6 +4,12 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search">
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous"
+        />
         <div>
           <input
             style={{ border: "none", borderRadius: "5px", padding: "5px" }}
@@ -32,17 +38,34 @@ class Search extends React.Component {
             />
           </div>
         </div>
+        <i
+          style={{
+            color: "#4584d4",
+            marginLeft: "50px",
+            marginRight: "10px",
+            paddingTop: "8px",
+            cursor: "pointer"
+          }}
+          onClick={this.props.refreshSearch}
+          className="fas fa-sync-alt"
+        />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "20%",
-            marginLeft: "80px"
+            width: "20%"
           }}
         >
-          <button className="buttonSearch" onClick={this.props.handleSearch}>
-            Rechercher
-          </button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              style={{ width: "100%", fontWeight: "bold" }}
+              className="buttonSearch"
+              onClick={this.props.handleSearch}
+            >
+              Rechercher
+            </button>
+          </div>
+
           <select
             onChange={this.props.handleChangeSort}
             value={this.props.sort}

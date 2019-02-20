@@ -2,16 +2,32 @@ import React from "react";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 import queryString from "query-string";
 
 class Offers extends React.Component {
   state = {
     offers: [],
     page: 0,
-    search: "",
-    priceMin: "",
-    priceMax: "",
-    sort: ""
+    search: Cookies.get("search") || null,
+    priceMin: Cookies.get("priceMin") || null,
+    priceMax: Cookies.get("priceMax") || null,
+    sort: Cookies.get("sort") || null
+  };
+
+  refreshSearch = async () => {
+    await Cookies.remove("search");
+    await Cookies.remove("priceMin");
+    await Cookies.remove("priceMax");
+    await Cookies.remove("sort");
+    await this.setState({
+      search: "",
+      priceMin: "",
+      priceMax: "",
+      sort: ""
+    });
+    console.log(this.state);
+    this.handleSearch();
   };
 
   handleChangeSearch = event => {
@@ -26,10 +42,10 @@ class Offers extends React.Component {
     const value = event.target.value;
     this.setState({ priceMax: Number(value) });
   };
-  handleChangeSort = event => {
-    console.log("hello");
+  handleChangeSort = async event => {
     const value = event.target.value;
-    this.setState({ sort: value });
+    await this.setState({ sort: value });
+    this.handleSearch();
   };
 
   handleSearch = async () => {
@@ -42,18 +58,22 @@ class Offers extends React.Component {
 
     if (search) {
       parsed.title = search;
+      await Cookies.set("search", search);
     }
 
     if (priceMin) {
       parsed.priceMin = priceMin;
+      await Cookies.set("priceMin", priceMin);
     }
 
     if (priceMax) {
       parsed.priceMax = priceMax;
+      await Cookies.set("priceMax", priceMin);
     }
 
     if (sort) {
       parsed.sort = sort;
+      await Cookies.set("sort", sort);
     }
 
     const stringified = queryString.stringify(parsed);
@@ -107,6 +127,7 @@ class Offers extends React.Component {
     return (
       <div>
         <Search
+          refreshSearch={this.refreshSearch}
           handleChangePriceMin={this.handleChangePriceMin}
           handleChangePriceMax={this.handleChangePriceMax}
           handleChangeSort={this.handleChangeSort}
@@ -163,13 +184,7 @@ class Offers extends React.Component {
     );
   }
   componentDidMount = async () => {
-    let offers = [...this.state.offers];
-    const response = await axios.get(
-      `https://leboncoin-api.herokuapp.com/api/offer/with-count?skip=${this
-        .state.page * 25}&limit=25`
-    );
-    offers = response.data.offers;
-    this.setState({ offers: offers });
+    await this.handleSearch();
   };
 }
 

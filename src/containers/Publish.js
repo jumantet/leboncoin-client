@@ -15,6 +15,7 @@ class Publish extends React.Component {
 
   handleFiles = files => {
     const newFiles = [...this.state.files, ...files.base64];
+    console.log("newFiles", newFiles);
     this.setState({ files: newFiles });
   };
 
@@ -33,9 +34,8 @@ class Publish extends React.Component {
         }
       }
     );
-    this.props.history.push("/offers");
-
     console.log(response.data);
+    this.props.history.push(`/offers/offer/${response.data._id}`);
   };
   render() {
     const filesArray = [];
@@ -45,8 +45,8 @@ class Publish extends React.Component {
           <img
             key={i}
             style={{
-              height: "100px",
-              width: "100px",
+              height: "70px",
+              width: "70px",
               objectFit: "cover",
               margin: "5px 5px"
             }}
@@ -106,41 +106,32 @@ class Publish extends React.Component {
               style={{
                 resize: "none",
                 borderRadius: "5px",
+                paddingRight: "5px",
                 border: "solid 1px #DADADA"
               }}
               value={this.state.description}
               rows="15"
               cols="77"
             />
-            <ReactFileReader
-              fileTypes={[".png", ".jpg"]}
-              base64={true}
-              multipleFiles={true} // `false si une seule image`
-              handleFiles={this.handleFiles}
+            <h5 style={{ color: "#F36B35", marginTop: "10px" }}>
+              Ajouter des photos
+            </h5>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap"
+              }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center"
-                }}
+              <ReactFileReader
+                fileTypes={[".png", ".jpg"]}
+                base64={true}
+                multipleFiles={true} // `false si une seule image`
+                handleFiles={this.handleFiles}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    border: "solid 1px #F36B35",
-                    height: "100px",
-                    width: "50%",
-                    margin: "20px 0",
-                    borderRadius: "5px",
-                    cursor: "pointer"
-                  }}
-                >
-                  <h5 style={{ color: "#F36B35", margin: "0" }}>
-                    Ajouter des photos
-                  </h5>
+                {filesArray[0] ? (
+                  filesArray[0]
+                ) : (
                   <i
                     style={{
                       color: "#F36B35",
@@ -149,20 +140,85 @@ class Publish extends React.Component {
                     }}
                     className="fas fa-camera"
                   />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    margin: "0 5px",
-                    flexWrap: "wrap",
-                    justifyContent: "center"
-                  }}
-                >
-                  {filesArray}
-                </div>
-              </div>
-            </ReactFileReader>
+                )}
+              </ReactFileReader>
+              <ReactFileReader
+                fileTypes={[".png", ".jpg"]}
+                base64={true}
+                multipleFiles={true} // `false si une seule image`
+                handleFiles={this.handleFiles}
+              >
+                {filesArray[1] ? (
+                  filesArray[1]
+                ) : (
+                  <i
+                    style={{
+                      color: "#F36B35",
+                      fontSize: "60px",
+                      marginTop: "10px"
+                    }}
+                    className="fas fa-camera"
+                  />
+                )}
+              </ReactFileReader>
+              <ReactFileReader
+                fileTypes={[".png", ".jpg"]}
+                base64={true}
+                multipleFiles={true} // `false si une seule image`
+                handleFiles={this.handleFiles}
+              >
+                {filesArray[2] ? (
+                  filesArray[2]
+                ) : (
+                  <i
+                    style={{
+                      color: "#F36B35",
+                      fontSize: "60px",
+                      marginTop: "10px"
+                    }}
+                    className="fas fa-camera"
+                  />
+                )}
+              </ReactFileReader>
+              <ReactFileReader
+                fileTypes={[".png", ".jpg"]}
+                base64={true}
+                multipleFiles={true} // `false si une seule image`
+                handleFiles={this.handleFiles}
+              >
+                {filesArray[3] ? (
+                  filesArray[3]
+                ) : (
+                  <i
+                    style={{
+                      color: "#F36B35",
+                      fontSize: "60px",
+                      marginTop: "10px"
+                    }}
+                    className="fas fa-camera"
+                  />
+                )}
+              </ReactFileReader>
+              <ReactFileReader
+                fileTypes={[".png", ".jpg"]}
+                base64={true}
+                multipleFiles={true} // `false si une seule image`
+                handleFiles={this.handleFiles}
+              >
+                {filesArray[4] ? (
+                  filesArray[4]
+                ) : (
+                  <i
+                    style={{
+                      color: "#F36B35",
+                      fontSize: "60px",
+                      marginTop: "10px"
+                    }}
+                    className="fas fa-camera"
+                  />
+                )}
+              </ReactFileReader>
+            </div>
 
             <h5>Prix</h5>
             <input
