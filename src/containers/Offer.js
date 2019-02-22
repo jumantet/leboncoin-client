@@ -65,7 +65,9 @@ class Offer extends React.Component {
     let offer = { ...offer };
 
     const response = await axios.get(
-      `http://localhost:3100/offer/${this.props.match.params.id}`
+      `https://leboncoin-server.herokuapp.com/offer/${
+        this.props.match.params.id
+      }`
     );
 
     offer = response.data;

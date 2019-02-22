@@ -82,7 +82,7 @@ class Offers extends React.Component {
 
     let offers = [...this.state.offers];
     const response = await axios.get(
-      `http://localhost:3100/offer/with-count?${filters}`
+      `https://leboncoin-server.herokuapp.com/offer/with-count?${filters}`
     );
     console.log(response.data);
     offers = response.data;
