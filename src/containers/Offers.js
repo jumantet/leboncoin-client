@@ -82,7 +82,7 @@ class Offers extends React.Component {
 
     let offers = [...this.state.offers];
     const response = await axios.get(
-      `http://localhost:3100/offer/with-count?${filters}`
+      `https://leboncoin-server.herokuapp.com/offer/with-count?${filters}`
     );
     console.log(response.data);
     offers = response.data;
@@ -117,8 +117,8 @@ class Offers extends React.Component {
     this.setState({ page: copypage }, () => console.log(this.state.page));
     let offers = [...this.state.offers];
     const response = await axios.get(
-      `http://localhost:3100/offer/with-count?skip=${this.state.page *
-        25}&limit=25`
+      `https://leboncoin-server.herokuapp.com/with-count?skip=${this.state
+        .page * 25}&limit=25`
     );
     offers = response.data.offers;
     this.setState({ offers: offers });
