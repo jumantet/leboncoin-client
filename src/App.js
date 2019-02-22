@@ -15,7 +15,7 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    userName: Cookies.get("userName") || null,
+    userName: Cookies.get("username") || null,
     userId: null,
     token: Cookies.get("token") || null
   };
@@ -23,7 +23,7 @@ class App extends Component {
   signUpTo = async inputs => {
     console.log(inputs);
     const response = await axios.post(
-      "https://leboncoin-server.herokuapp.com/user/sign_up",
+      "http://localhost:3100/user/sign_up",
       inputs
     );
 
@@ -39,7 +39,7 @@ class App extends Component {
 
   connectTo = async inputs => {
     const response = await axios.post(
-      "https://leboncoin-server.herokuapp.com/user/log_in",
+      "http://localhost:3100/user/log_in",
       inputs
     );
 
