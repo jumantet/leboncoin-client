@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 class SignUp extends React.Component {
   state = {
@@ -143,19 +142,17 @@ class SignUp extends React.Component {
             <form
               onSubmit={event => {
                 event.preventDefault();
-                {
-                  this.state.mdp === this.state.mdpconfirm &&
-                  this.state.salesconditions === true
-                    ? this.props.signUpTo(
-                        {
-                          username: this.state.pseudo,
-                          email: this.state.mail,
-                          password: this.state.mdp
-                        },
-                        this.props.history.push("/offers")
-                      )
-                    : alert("Réessayez");
-                }
+                this.state.mdp === this.state.mdpconfirm &&
+                this.state.salesconditions === true
+                  ? this.props.signUpTo(
+                      {
+                        username: this.state.pseudo,
+                        email: this.state.mail,
+                        password: this.state.mdp
+                      },
+                      this.props.history.push("/offers")
+                    )
+                  : alert("Réessayez");
               }}
             >
               <div style={{ marginTop: "20px" }}>

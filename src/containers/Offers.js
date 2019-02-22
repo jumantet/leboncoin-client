@@ -82,9 +82,10 @@ class Offers extends React.Component {
 
     let offers = [...this.state.offers];
     const response = await axios.get(
-      `https://leboncoin-server.herokuapp.com/offer/with-count?${filters}`
+      `http://localhost:3100/offer/with-count?${filters}`
     );
-    offers = response.data.offers;
+    console.log(response.data);
+    offers = response.data;
     this.setState({ offers: offers });
   };
 
@@ -95,9 +96,10 @@ class Offers extends React.Component {
     }
     return (
       pages,
-      pages.map(x => {
+      pages.map((x, index) => {
         return (
           <span
+            key={index}
             style={{ cursor: "pointer" }}
             onClick={() => this.handleChangePage(x)}
             className="page"
@@ -115,8 +117,8 @@ class Offers extends React.Component {
     this.setState({ page: copypage }, () => console.log(this.state.page));
     let offers = [...this.state.offers];
     const response = await axios.get(
-      `https://leboncoin-server.herokuapp.com/offer/with-count?skip=${this.state
-        .page * 25}&limit=25`
+      `http://localhost:3100/offer/with-count?skip=${this.state.page *
+        25}&limit=25`
     );
     offers = response.data.offers;
     this.setState({ offers: offers });
@@ -185,6 +187,13 @@ class Offers extends React.Component {
   }
   componentDidMount = async () => {
     await this.handleSearch();
+    //   let offers = [...this.state.offers];
+    //   const response = await axios.get(
+    //     `https://leboncoin-server.herokuapp.com/offer/with-count?skip=${this.state
+    //       .page * 25}&limit=25`
+    //   );
+    //   offers = response.data.offers;
+    //   this.setState({ offers: offers });
   };
 }
 

@@ -15,6 +15,8 @@ class Offer extends React.Component {
       display.push(
         <div style={{ backgroundColor: "#D3D3D3" }}>
           <img
+            key={i}
+            alt={i}
             style={{ objectFit: "contain", width: "500px", height: "300px" }}
             src={this.state.pictures[i]["secure_url"]}
           />
@@ -31,7 +33,7 @@ class Offer extends React.Component {
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
         <div className="offer">
           {this.state.pictures.length > 0 ? (
@@ -50,7 +52,7 @@ class Offer extends React.Component {
         <div className="user">
           <i
             style={{ color: "#f36a35", fontSize: "50px" }}
-            class="fas fa-user"
+            className="fas fa-user"
           />
           <span style={{ fontWeight: "bold", marginLeft: "5px" }}>
             {this.state.user}
@@ -62,12 +64,11 @@ class Offer extends React.Component {
   componentDidMount = async () => {
     let offer = { ...offer };
     const response = await axios.get(
-      `https://leboncoin-server.herokuapp.com/offer/${
-        this.props.match.params.id
-      }`
+      `http://localhost:3100/offer/${this.props.match.params.id}`
     );
 
     offer = response.data;
+    console.log(response.data);
     this.setState({
       offer: offer,
       user: offer.creator.account.username,
