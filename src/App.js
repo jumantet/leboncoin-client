@@ -43,6 +43,8 @@ class App extends Component {
       inputs
     );
 
+    console.log(response.data);
+
     await Cookies.set("token", response.data.token);
     await Cookies.set("username", response.data.account.username);
 
