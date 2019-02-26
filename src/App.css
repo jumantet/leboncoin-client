@@ -36,6 +36,7 @@ h4 {
 }
 .offers {
   display: flex;
+
   border-bottom: solid 1px #e1e1e1;
 }
 

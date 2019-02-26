@@ -8,18 +8,26 @@ class Header extends React.Component {
     return (
       <div className="header">
         <div className="onglets">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
           <Link
             style={{ textDecoration: "none" }}
             to={this.props.token ? `/publish` : `/connect`}
           >
-            <h3 style={{ color: "white", fontSize: "16px" }}>
+            <h3 style={{ color: "white", fontSize: "14px" }}>
               DEPOSER UNE OFFRE
             </h3>
           </Link>
 
           <Link style={{ textDecoration: "none" }} to="/offers">
-            <h3 style={{ color: "white", fontSize: "16px" }}>OFFRES</h3>
+            <h3 style={{ color: "white", fontSize: "14px" }}>OFFRES</h3>
+          </Link>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={this.props.token ? `/myoffers` : `/connect`}
+          >
+            <h3 style={{ color: "white", fontSize: "14px" }}>MES OFFRES</h3>
           </Link>
         </div>
         <div className="identification">
@@ -27,7 +35,9 @@ class Header extends React.Component {
             style={{ textDecoration: "none", color: "black" }}
             to={`/sign_up`}
           >
-            <h4 style={{ color: "white" }}>Créer un compte</h4>
+            <h4 style={{ color: "white", fontSize: "14px" }}>
+              Créer un compte
+            </h4>
           </Link>
           <Link
             style={{ textDecoration: "none", color: "black" }}
@@ -35,7 +45,7 @@ class Header extends React.Component {
           >
             {this.props.token ? (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <h4 style={{ color: "white" }}>
+                <h4 style={{ color: "white", fontSize: "14px" }}>
                   Bienvenue {this.props.userName}
                 </h4>
                 <button
@@ -55,7 +65,7 @@ class Header extends React.Component {
                 </button>
               </div>
             ) : (
-              <h4 style={{ color: "white" }}>Se connecter</h4>
+              <h4 style={{ color: "white", fontSize: "14px" }}>Se connecter</h4>
             )}
           </Link>
         </div>

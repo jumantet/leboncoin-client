@@ -15,7 +15,6 @@ class Publish extends React.Component {
 
   handleFiles = files => {
     const newFiles = [...this.state.files, ...files.base64];
-    console.log("newFiles", newFiles);
     this.setState({ files: newFiles });
   };
 
@@ -73,7 +72,7 @@ class Publish extends React.Component {
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
         <div style={{ margin: "50px 150px 0 150px", backgroundColor: "white" }}>
           <div

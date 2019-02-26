@@ -71,7 +71,7 @@ class Offer extends React.Component {
     );
 
     offer = response.data;
-    console.log(response.data);
+
     this.setState({
       offer: offer,
       user: offer.creator.account.username,
