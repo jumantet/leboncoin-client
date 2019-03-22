@@ -9,10 +9,11 @@ class Offers extends React.Component {
   state = {
     offers: [],
     page: 0,
-    search: Cookies.get("search") || null,
-    priceMin: Cookies.get("priceMin") || null,
-    priceMax: Cookies.get("priceMax") || null,
-    sort: Cookies.get("sort") || null
+    pageNumber: [],
+    search: Cookies.get("search") || "",
+    priceMin: Cookies.get("priceMin") || "",
+    priceMax: Cookies.get("priceMax") || "",
+    sort: Cookies.get("sort") || ""
   };
 
   refreshSearch = async () => {
@@ -54,6 +55,15 @@ class Offers extends React.Component {
     let priceMin = this.state.priceMin;
     let priceMax = this.state.priceMax;
     let sort = this.state.sort;
+    let skip = this.state.page;
+    let limit = 25;
+
+    parsed.skip = skip * 25;
+
+    if (skip > 0) {
+      await Cookies.set("page", skip);
+    }
+    parsed.limit = limit;
 
     if (search) {
       parsed.title = search;
@@ -80,6 +90,7 @@ class Offers extends React.Component {
     filters = stringified;
 
     let offers = [...this.state.offers];
+
     const response = await axios.get(
       `https://leboncoin-server.herokuapp.com/offer/with-count?${filters}`
     );
@@ -87,43 +98,20 @@ class Offers extends React.Component {
     this.setState({ offers: offers });
   };
 
-  calculPages = () => {
-    let pages = [];
-    for (let i = 0; i < Math.floor(271 / 25); i++) {
-      pages.push(i);
-    }
-    return (
-      pages,
-      pages.map((x, index) => {
-        return (
-          <span
-            key={index}
-            style={{ cursor: "pointer" }}
-            onClick={() => this.handleChangePage(x)}
-            className="page"
-          >
-            {x}
-          </span>
-        );
-      })
-    );
-  };
+  calculPages = async () => {
+    let pageNumber = [...this.state.pageNumber];
 
-  handleChangePage = async page => {
-    let copypage = this.state.page;
-    copypage = page;
-    this.setState({ page: copypage }, () => console.log(this.state.page));
-    let offers = [...this.state.offers];
     const response = await axios.get(
-      `https://leboncoin-server.herokuapp.com/offer/with-count?skip=${this.state
-        .page * 25}&limit=25`
+      "https://leboncoin-server.herokuapp.com/offer/with-count"
     );
-    offers = response.data.offers;
-    this.setState({ offers: offers });
+    let offers = response.data;
+    for (let i = 0; i < Math.floor(offers.length / 25); i++) {
+      pageNumber.push(i);
+    }
+    this.setState({ pageNumber: pageNumber });
   };
 
   render() {
-    // console.log("offer", this.state.offers);
     return (
       <div>
         <Search
@@ -143,10 +131,11 @@ class Offers extends React.Component {
           {this.state.offers.map(offer => {
             return (
               <Link
+                key={offer._id}
                 style={{ textDecoration: "none" }}
                 to={`/offers/offer/${offer._id}`}
               >
-                <li className="offers" key={offer._id}>
+                <li className="offers">
                   <div className="image">
                     {offer.pictures.length > 0 ? (
                       <img
@@ -156,7 +145,7 @@ class Offers extends React.Component {
                           height: "100px"
                         }}
                         alt="offer"
-                        src={offer.pictures[0]["secure_url"]}
+                        src={offer.pictures[0]}
                       />
                     ) : null}
                   </div>
@@ -180,19 +169,32 @@ class Offers extends React.Component {
             );
           })}
         </ul>
-        <div className="footer">{this.calculPages()}</div>
+        <div className="footer">
+          {this.state.pageNumber.map((number, index) =>
+            number === this.state.page ? (
+              <p key={index} style={{ fontWeight: "bold", marginRight: "5px" }}>
+                {number}
+              </p>
+            ) : (
+              <p
+                key={index}
+                onClick={async () => {
+                  await this.setState({ page: number });
+                  this.handleSearch();
+                }}
+                style={{ marginRight: "5px" }}
+              >
+                {number}
+              </p>
+            )
+          )}
+        </div>
       </div>
     );
   }
   componentDidMount = async () => {
     await this.handleSearch();
-    //   let offers = [...this.state.offers];
-    //   const response = await axios.get(
-    //     `https://leboncoin-server.herokuapp.com/offer/with-count?skip=${this.state
-    //       .page * 25}&limit=25`
-    //   );
-    //   offers = response.data.offers;
-    //   this.setState({ offers: offers });
+    await this.calculPages();
   };
 }
 

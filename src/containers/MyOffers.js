@@ -123,7 +123,6 @@ class MyOffers extends React.Component {
       }
     );
     offers = response.data;
-    console.log(offers);
     this.setState({ offers: offers });
   };
 }

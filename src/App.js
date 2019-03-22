@@ -22,7 +22,6 @@ class App extends Component {
   };
 
   signUpTo = async inputs => {
-    console.log(inputs);
     const response = await axios.post(
       "https://leboncoin-server.herokuapp.com/user/sign_up",
       inputs
@@ -43,8 +42,6 @@ class App extends Component {
       "https://leboncoin-server.herokuapp.com/user/log_in",
       inputs
     );
-
-    console.log(response.data);
 
     await Cookies.set("token", response.data.token);
     await Cookies.set("username", response.data.account.username);

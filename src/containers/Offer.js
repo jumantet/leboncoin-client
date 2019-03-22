@@ -13,12 +13,11 @@ class Offer extends React.Component {
     let display = [];
     for (let i = 0; i < this.state.pictures.length; i++) {
       display.push(
-        <div style={{ backgroundColor: "#D3D3D3" }}>
+        <div key={i} style={{ backgroundColor: "#D3D3D3" }}>
           <img
-            key={i}
             alt={i}
             style={{ objectFit: "contain", width: "500px", height: "300px" }}
-            src={this.state.pictures[i]["secure_url"]}
+            src={this.state.pictures[i]}
           />
         </div>
       );
@@ -62,7 +61,7 @@ class Offer extends React.Component {
     );
   }
   componentDidMount = async () => {
-    let offer = { ...offer };
+    let offer = { ...this.state.offer };
 
     const response = await axios.get(
       `https://leboncoin-server.herokuapp.com/offer/${
