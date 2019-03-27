@@ -30,7 +30,8 @@ class Home extends React.Component {
                 height: "50px",
                 width: "300px",
                 fontWeight: "bold",
-                fontSize: "18px"
+                fontSize: "18px",
+                cursor: "pointer"
               }}
             >
               <i

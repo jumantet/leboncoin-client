@@ -74,7 +74,7 @@ class Publish extends React.Component {
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossOrigin="anonymous"
         />
-        <div style={{ margin: "50px 150px 0 150px", backgroundColor: "white" }}>
+        <div className="publishScreen">
           <div
             style={{
               backgroundColor: "#666666",
@@ -111,8 +111,8 @@ class Publish extends React.Component {
                 border: "solid 1px #DADADA"
               }}
               value={this.state.description}
-              rows="15"
-              cols="77"
+              rows="20"
+              cols="55"
             />
             <h5 style={{ color: "#F36B35", marginTop: "10px" }}>
               Ajouter des photos

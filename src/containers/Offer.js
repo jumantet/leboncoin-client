@@ -16,7 +16,7 @@ class Offer extends React.Component {
         <div key={i} style={{ backgroundColor: "#D3D3D3" }}>
           <img
             alt={i}
-            style={{ objectFit: "contain", width: "500px", height: "300px" }}
+            className="imageOfferSelected"
             src={this.state.pictures[i]}
           />
         </div>

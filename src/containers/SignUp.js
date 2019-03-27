@@ -31,22 +31,8 @@ class SignUp extends React.Component {
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossOrigin="anonymous"
         />
-        <div
-          style={{
-            display: "flex",
-            margin: "20px 150px",
-            padding: "20px 40px",
-            backgroundColor: "white"
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              flex: "1",
-              marginRight: "10px"
-            }}
-          >
+        <div className="signUpScreen">
+          <div className="bloc1">
             <h3 style={{ margin: "0" }}>Pourquoi créer un compte ?</h3>
             <div
               style={{

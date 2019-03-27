@@ -63,6 +63,13 @@ h4 {
   margin: 0;
   height: 300px;
 }
+
+.imageOfferSelected {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+}
+
 h2 {
   margin: 0;
 }
@@ -148,4 +155,112 @@ input[type="number"]::-webkit-outer-spin-button {
 .react-file-reader-button {
   margin: 0 10px;
   cursor: pointer;
+}
+
+.connectScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 150px;
+  padding: 20px 40px;
+  background-color: white;
+}
+
+.form {
+  width: 50%;
+}
+.signUpScreen {
+  display: flex;
+  margin: 20px 150px;
+  padding: 20px 40px;
+  background-color: white;
+}
+.bloc1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.publishScreen {
+  margin: 50px 150px 0 150px;
+  background-color: white;
+}
+
+.modalHeaderActive {
+  display: flex;
+  flex-direction: column;
+  align-items: "center";
+  background-color: #f36a35;
+  padding: 10px 12px;
+  border-top: solid 1px white;
+}
+
+.modalHeaderInactive {
+  display: none;
+}
+/* MEDIA QUERIES */
+
+@media (max-width: 1250px) {
+  .header {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .signUpScreen {
+    padding: 10px 10px;
+    margin: 10px 50px;
+  }
+}
+@media (max-width: 1000px) {
+  .offersList {
+    margin: 20px 20px;
+  }
+  .bloc1 {
+    display: none;
+  }
+  .search {
+    padding: 10px 20px;
+  }
+  .signUpScreen {
+    padding: 10px 100px;
+    margin: 10px 100px;
+  }
+  .searchTitle {
+    width: 350px;
+  }
+  .connectScreen {
+    padding: 10px 10px;
+    margin: 20px 20px;
+  }
+  .publishScreen {
+    padding: 10px 10px;
+    margin: 20px 20px;
+  }
+  .offertotal {
+    padding: 10px 10px;
+    margin: 20px 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .search {
+    display: none;
+  }
+  .signUpScreen {
+    padding: 10px 10px;
+    margin: 10px 10px;
+  }
+  .form {
+    width: 80%;
+  }
+  .imageOfferSelected {
+    object-fit: cover;
+    width: 300px;
+    height: 200px;
+  }
+  .title > h2 {
+    font-size: 20px;
+  }
 }

@@ -14,18 +14,8 @@ class Connect extends React.Component {
   render() {
     return (
       <div>
-        <div
-          style={{
-            display: "flex",
-
-            flexDirection: "column",
-            alignItems: "center",
-            margin: "20px 150px",
-            padding: "20px 40px",
-            backgroundColor: "white"
-          }}
-        >
-          <div style={{ width: "50%" }}>
+        <div className="connectScreen">
+          <div className="form">
             <h4
               style={{
                 margin: 0,
