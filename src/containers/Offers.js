@@ -182,7 +182,7 @@ class Offers extends React.Component {
                   await this.setState({ page: number });
                   this.handleSearch();
                 }}
-                style={{ marginRight: "5px" }}
+                style={{ marginRight: "5px", cursor: "pointer" }}
               >
                 {number}
               </p>
