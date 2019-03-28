@@ -138,15 +138,27 @@ class Offers extends React.Component {
                 <li className="offers">
                   <div className="image">
                     {offer.pictures.length > 0 ? (
-                      <img
-                        style={{
-                          objectFit: "contain",
-                          width: "150px",
-                          height: "100px"
-                        }}
-                        alt="offer"
-                        src={offer.pictures[0]}
-                      />
+                      typeof offer.pictures[0] === "string" ? (
+                        <img
+                          style={{
+                            objectFit: "contain",
+                            width: "150px",
+                            height: "100px"
+                          }}
+                          alt="offer"
+                          src={offer.pictures[0]}
+                        />
+                      ) : (
+                        <img
+                          style={{
+                            objectFit: "contain",
+                            width: "150px",
+                            height: "100px"
+                          }}
+                          alt="offer"
+                          src={offer.pictures[0].url}
+                        />
+                      )
                     ) : null}
                   </div>
                   <div className="description">

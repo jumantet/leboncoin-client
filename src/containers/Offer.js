@@ -11,16 +11,30 @@ class Offer extends React.Component {
 
   displayImages = () => {
     let display = [];
+    console.log(this.state.pictures);
+
     for (let i = 0; i < this.state.pictures.length; i++) {
-      display.push(
-        <div key={i} style={{ backgroundColor: "#D3D3D3" }}>
-          <img
-            alt={i}
-            className="imageOfferSelected"
-            src={this.state.pictures[i]}
-          />
-        </div>
-      );
+      if (typeof this.state.pictures[i] === "object") {
+        display.push(
+          <div key={i} style={{ backgroundColor: "#D3D3D3" }}>
+            <img
+              alt={i}
+              className="imageOfferSelected"
+              src={this.state.pictures[i].url}
+            />
+          </div>
+        );
+      } else if (typeof this.state.pictures[i] === "string") {
+        display.push(
+          <div key={i} style={{ backgroundColor: "#D3D3D3" }}>
+            <img
+              alt={i}
+              className="imageOfferSelected"
+              src={this.state.pictures[i]}
+            />
+          </div>
+        );
+      }
     }
     return display;
   };
